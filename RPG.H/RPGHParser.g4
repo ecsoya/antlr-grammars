@@ -3,80 +3,112 @@
  */
 parser grammar RPGHParser;
 
-options {
-	tokenVocab = RPGHLexer;
-}
+ options {
+ 	tokenVocab = RPGHLexer;
+ }
 
-r
-:
-	(
-		statement
-		| blackLine
-		| starComments
-	)* endSource*
-;
+ r
+ :
+ 	(
+ 		statement
+ 		| blackLine
+ 		| starComments
+ 	)* endSource*
+ ;
 
-//End of source, start with ** or EOF
-endSource: endSourceHead endSourceLine*;
-endSourceHead: END_SOURCE;
-endSourceLine: EOS_Text (EOL|EOF);
+ //End of source, start with ** or EOF
 
-//Black line from column 6
-blackLine: BLACK_LINE;
+ endSource
+ :
+ 	endSourceHead endSourceLine*
+ ;
 
-//Comments begin with *
-starComments: COMMENT_SPEC_FIXED comments?;
-comments: COMMENT_TEXT;
+ endSourceHead
+ :
+ 	END_SOURCE
+ ;
 
-statement
-:
-	specification
-;
+ endSourceLine
+ :
+ 	EOS_Text
+ 	(
+ 		EOL
+ 		| EOF
+ 	)
+ ;
 
-//Control Specification
-specification
-:
-	HS_INDICATOR expression*
-	(
-		EOL
-		| EOF
-	)
-;
+ //Black line from column 6
 
-//Control Specification Expression
-expression
-:
-	(
-		ID
-		(
-			OPEN_PAREN
-			(
-				parameter
-				(
-					COLON parameter
-				)*
-			)? CLOSE_PAREN
-		)?
-	)
-;
+ blackLine
+ :
+ 	BLACK_LINE
+ ;
 
-//Control Specification parameter of expression
-parameter
-:
-	ID
-	| string
-	| symbolicConstants
-;
+ //Comments begin with *
 
-string
-:
-	StringLiteralStart
-	(
-		StringContent
-		| StringEscapedQuote
-	)* StringLiteralEnd
-;
+ starComments
+ :
+ 	COMMENT_SPEC_FIXED comments?
+ ;
 
-symbolicConstants
-:
-;
+ comments
+ :
+ 	COMMENT_TEXT
+ ;
+
+ statement
+ :
+ 	specification
+ ;
+
+ //Control Specification
+
+ specification
+ :
+ 	HS_INDICATOR expression*
+ 	(
+ 		EOL
+ 		| EOF
+ 	)
+ ;
+
+ //Control Specification Expression
+
+ expression
+ :
+ 	(
+ 		ID
+ 		(
+ 			OPEN_PAREN
+ 			(
+ 				parameter
+ 				(
+ 					COLON parameter
+ 				)*
+ 			)? CLOSE_PAREN
+ 		)?
+ 	)
+ ;
+
+ //Control Specification parameter of expression
+
+ parameter
+ :
+ 	ID
+ 	| string
+ 	| symbolicConstants
+ ;
+
+ string
+ :
+ 	StringLiteralStart
+ 	(
+ 		StringContent
+ 		| StringEscapedQuote
+ 	)* StringLiteralEnd
+ ;
+
+ symbolicConstants
+ :
+ ;
+

@@ -69,3 +69,4 @@ fragment NAMECHAR: [A-Za-z0-9$#@_ ];
 fragment INITNAMECHAR: [A-Za-z$#@];
 fragment WORD_WCOLON: ~[\r\n]; //[a-zA-Z0-9 :*];
 fragment WORD5_W_COLON: WORD_WCOLON WORD_WCOLON WORD_WCOLON WORD_WCOLON WORD_WCOLON;
+

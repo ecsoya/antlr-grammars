@@ -1,0 +1,2 @@
+     FCOLMBID   UF A E           K DISK    COMMIT(C_COLMBID)   
+     

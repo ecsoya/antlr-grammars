@@ -46,5 +46,8 @@
 	</build>
 	<modules>
 		<module>../RPG.H</module>
+		
+		<module>../RPG.F</module>
+		<module>../RPG.D</module>
 	</modules>
 </project>
