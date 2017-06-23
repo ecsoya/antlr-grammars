@@ -114,7 +114,7 @@ parser grammar RPGDParser;
  keyword_based: KEYWORD_BASED OPEN_PAREN basingPointerName = simpleExpression CLOSE_PAREN;
  keyword_const: KEYWORD_CONST OPEN_PAREN constant = simpleExpression CLOSE_PAREN;
  keyword_ctdata: KEYWORD_CTDATA;
- keyword_datfmt: KEYWORD_DATFMT OPEN_PAREN (simpleExpression | symbolicConstants) (dateSeparator)? CLOSE_PAREN;
+ keyword_datfmt: KEYWORD_DATFMT OPEN_PAREN fmt = dateFormat (dateSeparator)? CLOSE_PAREN;
  keyword_descend: KEYWORD_DESCEND;
  keyword_dim: KEYWORD_DIM OPEN_PAREN numericConstant = simpleExpression CLOSE_PAREN;
  keyword_dtaara: KEYWORD_DTAARA (OPEN_PAREN name = simpleExpression CLOSE_PAREN)?;
@@ -133,20 +133,22 @@ parser grammar RPGDParser;
  keyword_perrcd: KEYWORD_PERRCD OPEN_PAREN numericConstant = simpleExpression CLOSE_PAREN;
  keyword_prefix: KEYWORD_PREFIX OPEN_PAREN prefix = simpleExpression CLOSE_PAREN;
  keyword_procptr: KEYWORD_PROCPTR;
- keyword_timfmt: KEYWORD_TIMFMT OPEN_PAREN (simpleExpression | symbolicConstants) (timeSeparator)? CLOSE_PAREN;
+ keyword_timfmt: KEYWORD_TIMFMT OPEN_PAREN fmt = timeFormat (timeSeparator)? CLOSE_PAREN;
  keyword_tofile: KEYWORD_TOFILE OPEN_PAREN fileName = simpleExpression CLOSE_PAREN;
  
  extfmtCode: EXTFMT_OPTION_S | EXTFMT_OPTION_P | EXTFMT_OPTION_B | EXTFMT_OPTION_L EXTFMT_OPTION_R;
  
  number: NUMBER ;
  
- dateSeparator: AMPERSAND | MINUS | DIV | DOT | COMMA;
- 
- timeSeparator: COLON | DOT | COMMA | AMPERSAND;
+ dateFormatEdit: DMY | MDY | YMD;
+ dateFormat: DMY | EUR | ISO | JIS | JUL | MDY | USA | YMD;
+ dateSeparator: DIV | AMPERSAND | MINUS | DOT | COMMA;
 
+ timeFormat: HMS | ISO | USA | EUR | JIS;
+ timeSeparator: SEMI | DOT | COMMA | AMPERSAND;
+ 
  simpleExpression
  :
+ 	ID
  ;
  
- symbolicConstants: 
-   ;

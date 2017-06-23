@@ -46,8 +46,6 @@ ID: ('*' {getCharPositionInLine() > 7}? '*'? [a-zA-Z])?
 NEWLINE : ('\r'? '\n') -> skip;
 WS: [ \t] {getCharPositionInLine() > 6}? [ \t]* -> skip; //skip spaces, tabs
 
-StringLiteralStart: ['] -> pushMode(InStringMode);
-
 mode CommentMode;
 BLACK_COMMENT_TEXT: [ ]+ -> skip;
 COMMENT_TEXT: ~[\r\n]+ {setText(getText().trim());} -> channel(HIDDEN);
@@ -86,8 +84,11 @@ DS_COMMENTS80: ~[\r\n] {getCharPositionInLine() >= 81}? ~[\r\n] -> channel(HIDDE
 EOL: NEWLINE -> popMode;
 
 mode FREE;
+F_OPEN_PAREN: OPEN_PAREN -> type(OPEN_PAREN);
+F_CLOSE_PAREN: CLOSE_PAREN -> type(CLOSE_PAREN);
+F_COLON: COLON -> type(COLON);
 
-//Define Specification Keywords
+//Definition Specification Keywords
 KEYWORD_ALT : [Aa][Ll][Tt];
 KEYWORD_ASCEND : [Aa][Ss][Cc][Ee][Nn][Dd];
 KEYWORD_BASED : [Bb][Aa][Ss][Ee][Dd];
@@ -121,11 +122,36 @@ EXTFMT_OPTION_B: [bB];
 EXTFMT_OPTION_L: [lL];
 EXTFMT_OPTION_R: [rR];
 
+//Options
+OPTION_NONE: '*'[nN][oO][nN][eE];
+OPTION_SRC: '*'[sS][rR][cC];
+OPTION_EXT: '*'[eE][xX][tT];
+OPTION_NO: '*'[nN][oO];
+OPTION_YES: '*'[yY][eE][sS];
+OPTION_FILE: '*'[fF][iI][lL][eE];
+OPTION_ONLY: '*'[oO][nN][lL][yY];
+
+//Date and time format
+DMY: '*'[dD][mM][yY];
+MDY: '*'[mM][dD][yY];
+YMD: '*'[yY][mM][dD];
+JUL: '*'[jJ][uU][lL];
+ISO: '*'[iI][sS][oO];
+USA: '*'[uU][sS][aA];
+EUR: '*'[eE][uU][rR];
+JIS: '*'[jJ][iI][sS];
+HMS: '*'[hH][mM][sS];
+
 AMPERSAND: '&';
 MINUS : '-' ;
 DOT: '.';
 DIV: '/';
 COMMA: ',';
+
+FREE_ID: ID -> type(ID);
+StringLiteralStart: ['] -> pushMode(InStringMode);
+FREE_WS: [ \t] {getCharPositionInLine()>6}? [ \t]* -> skip;
+F_FREE_NEWLINE: NEWLINE {_modeStack.peek() == DS_MODE}? -> type(EOL),popMode,popMode;
 
 fragment WORD5 : ~[\r\n]~[\r\n]~[\r\n]~[\r\n]~[\r\n];
 fragment NAME5: NAMECHAR NAMECHAR NAMECHAR NAMECHAR NAMECHAR;

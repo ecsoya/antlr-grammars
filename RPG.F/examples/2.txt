@@ -1,5 +1,3 @@
-     Ffile3     IF   F   10        DISK    EXTFILE(filename3)         
-     FCOLMBID   UF A E           K DISK    EXTIND(U8)       
+     FCOLMBID   UF A E           K DISK    EXTIND(*INU8)       
      FALLMBID   IF   E           K DISK    INCLUDE(FORMAT1)       
      FCOLMBID   UF   E           K DISK    INFDS(DSMBID) INFSR(SUBRER) 
-     F                                     RENAME(COPMB1:COLMBID1)  
