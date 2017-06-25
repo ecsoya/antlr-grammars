@@ -49,5 +49,6 @@
 		
 		<module>../RPG.F</module>
 		<module>../RPG.D</module>
+		<module>../RPG.I</module>
 	</modules>
 </project>
