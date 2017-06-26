@@ -50,5 +50,6 @@
 		<module>../RPG.F</module>
 		<module>../RPG.D</module>
 		<module>../RPG.I</module>
+		<module>../RPG.C</module>
 	</modules>
 </project>
