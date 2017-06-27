@@ -75,7 +75,7 @@ parser grammar RPGCParser;
  
  csComments: CS_FIXED_COMMENTS;
  
- calcExtendedFactor2Parts:;
+ calcExtendedFactor2Parts: operationExtender? expression ;
  
  resultIndicator: INDICATOR_BLACK | INDICATOR_GENERAL | INDICATOR_FUNC_KEY | INDICATOR_HALT | INDICATOR_CONTROL_LEVEL | INDICATOR_LAST_RECORD | INDICATOR_OVERFLOW | INDICATOR_RETURN;
  
@@ -93,4 +93,6 @@ parser grammar RPGCParser;
  
  literal: StringLiteralStart
 	content=(StringContent | StringEscapedQuote )* StringLiteralEnd;
+	
+ expression:;
  
