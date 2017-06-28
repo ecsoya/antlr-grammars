@@ -11,9 +11,9 @@ parser grammar RPGDParser;
  :
  	(
  		statement
- 		| blackLine
- 		| starComments
- 	)* endSource*
+ 		| c1 = blackLine
+ 		| c2 = starComments
+ 	)* c3 = endSource*
  ;
 
  //End of source, start with ** or EOF

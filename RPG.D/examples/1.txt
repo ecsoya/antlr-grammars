@@ -1,2 +1,1 @@
-     D  Lda_fld        S                    LIKE(Name) DTAARA(*LDA)     
-     D              E SC              A    EXTFLD(MSR173)
+     D*  Lda_fld        S                    LIKE(Name) DTAARA(*LDA)     

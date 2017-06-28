@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>RPG</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Antlr4 grammar for IBM RPG III.</description>
+  <parent>
+  	<groupId>org.ecsoya.antlr4</groupId>
+  	<artifactId>grammars</artifactId>
+  	<version>1.0.0-SNAPSHOT</version>
+  	<relativePath>../grammars</relativePath>
+  </parent>
+  
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr.version}</version>
+				<configuration>
+					<sourceDirectory>${basedir}</sourceDirectory>
+					<grammars>RPGParser.g4</grammars>
+					<visitor>true</visitor>
+					<listener>true</listener>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.khubla.antlr</groupId>
+				<artifactId>antlr4test-maven-plugin</artifactId>
+				<version>${antlr4test-maven-plugin.version}</version>
+				<configuration>
+					<verbose>true</verbose>
+					<showTree>true</showTree>
+					<entryPoint>r</entryPoint>
+					<grammarName>RPG</grammarName>
+					<packageName></packageName>
+					<exampleFiles>examples/</exampleFiles>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  <name>RPG g4</name>
+</project>
